@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:di="http://www.omg.org/spec/DMN/20180521/DI/" id="Definitions_18si9id" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="4.10.0">
+  <decision id="SupportTicketTriage" name="Zuständigen 2nd Level Support bestimmen">
+    <informationRequirement id="InformationRequirement_06bgh2y">
+      <requiredInput href="#TriagePrio" />
+    </informationRequirement>
+    <informationRequirement id="InformationRequirement_11aeser">
+      <requiredInput href="#TriageCat" />
+    </informationRequirement>
+    <decisionTable id="DecisionTable_08vx37t" hitPolicy="FIRST">
+      <input id="Input_1" label="Priorität">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text>lower case(priority)</text>
+        </inputExpression>
+      </input>
+      <input id="InputClause_18d8xu5" label="Kategorie">
+        <inputExpression id="LiteralExpression_02hjdla" typeRef="string">
+          <text>lower case(category)</text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" label="zuständige Supportgruppe " name="responsible_group" typeRef="string" />
+      <rule id="DecisionRule_033ct1j">
+        <inputEntry id="UnaryTests_0wjob8g">
+          <text>"high"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0taio2l">
+          <text></text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12dthse">
+          <text>"super-senior-crack"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1womj4c">
+        <inputEntry id="UnaryTests_1wqm2bn">
+          <text>matches("low", "middle") </text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_1urwq0p">
+          <text>contains("hw.") </text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_18hykuk">
+          <text>"hardware-team"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1n0bp45">
+        <inputEntry id="UnaryTests_02oyfpl">
+          <text>matches("low", "middle") </text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0nn2w96">
+          <text>"sw.os"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_02z9uu0">
+          <text>"os-team"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1wi05d4">
+        <inputEntry id="UnaryTests_0b03yyk">
+          <text>"middle"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0jtiqu9">
+          <text>"sw.office"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1tkjs4j">
+          <text>"office-2nd-team"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1xd0c0v">
+        <inputEntry id="UnaryTests_03xnns7">
+          <text>"low"</text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0s5fi1b">
+          <text>"sw.office"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_1dlvoi3">
+          <text>"office-1st-team"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_06nzpb0">
+        <inputEntry id="UnaryTests_154qjrj">
+          <text>matches("low", "middle") </text>
+        </inputEntry>
+        <inputEntry id="UnaryTests_0rx75s3">
+          <text>"sw.other"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_19guvbi">
+          <text>"beissen-die-hunde-team"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <inputData id="TriagePrio" name="Priorität" />
+  <inputData id="TriageCat" name="Kategorie" />
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="SupportTicketTriage">
+        <dc:Bounds height="80" width="180" x="230" y="100" />
+      </dmndi:DMNShape>
+      <dmndi:DMNShape id="DMNShape_1y5udd0" dmnElementRef="TriagePrio">
+        <dc:Bounds height="45" width="125" x="157" y="297" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_0v79dq8" dmnElementRef="InformationRequirement_06bgh2y">
+        <di:waypoint x="220" y="297" />
+        <di:waypoint x="290" y="200" />
+        <di:waypoint x="290" y="180" />
+      </dmndi:DMNEdge>
+      <dmndi:DMNShape id="DMNShape_0321slh" dmnElementRef="TriageCat">
+        <dc:Bounds height="45" width="125" x="357" y="297" />
+      </dmndi:DMNShape>
+      <dmndi:DMNEdge id="DMNEdge_01ukgb9" dmnElementRef="InformationRequirement_11aeser">
+        <di:waypoint x="420" y="297" />
+        <di:waypoint x="350" y="200" />
+        <di:waypoint x="350" y="180" />
+      </dmndi:DMNEdge>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>
